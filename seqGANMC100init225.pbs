@@ -12,11 +12,6 @@
 #PBS -j oe
 #PBS -V
 
-# Change "example_flux" to the name of your Flux allocation:
-#PBS -A engin_fluxg
-#PBS -q fluxg
-#PBS -l qos=flux
-
 ####  End PBS preamble
 
 #  Show list of CPUs you ran on, if you're running under PBS
@@ -30,11 +25,11 @@ echo "Hello, world"
 #PBS -l qos=flux
 ####  End PBS preamble
 
-mkdir /tmp/${PBS_JOBID}
-cd /tmp/${PBS_JOBID}
+mkdir /z/tmp/lubicz/
+cp /z/home/lubicz/testFiles /z/tmp/lubicz/
+cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
-
-cp -r ~/research .
-cd research
-
+module load python-anaconda3
+pip install -u mxnet-cu92
 python seqGANMC100init225.py
+                                                              33,1          Bot
