@@ -8,16 +8,10 @@
 #PBS -m abe
 
 # Change the number of cores (ppn=1), amount of memory, and walltime:
-#PBS -l nodes=1:gpus=1,mem=8gb,walltime=72:00:00
+#PBS -l nodes=1:gpus=2,mem=20gb,walltime=1000:00:00
 #PBS -j oe
 #PBS -V
 
-# Change "example_flux" to the name of your Flux allocation:
-#PBS -A engin_fluxg
-#PBS -q fluxg
-#PBS -l qos=flux
-
-####  End PBS preamble
 
 #  Show list of CPUs you ran on, if you're running under PBS
 if [ -n "$PBS_NODEFILE" ]; then cat $PBS_NODEFILE; fi
@@ -30,11 +24,10 @@ echo "Hello, world"
 #PBS -l qos=flux
 ####  End PBS preamble
 
-mkdir /tmp/${PBS_JOBID}
-cd /tmp/${PBS_JOBID}
+mkdir /z/tmp/lubicz/
+cp /z/home/lubicz/testFiles /z/tmp/lubicz/
+cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
-
-cp -r ~/research .
-cd research
-
-python seqGANMC200init3.py
+module load python-anaconda3
+pip install mxnet-cu80==1.0.0 --user
+python seqGANMC100init3.py
