@@ -8,12 +8,9 @@ from mxnet import ndarray as nd
 from mxnet import symbol as sym
 from mxnet.gluon import nn, utils
 from mxnet import autograd
-from scipy.stats import norm
-import matplotlib.mlab as mlab
 from math import e
 import math
 import time
-
 
 batch_size = 128
 n_mixture = 8
@@ -78,8 +75,7 @@ if data_type == "arrivals":
     print(samples)
     #print(samples.T[0:3])
     train_data = mx.io.NDArrayIter(data = samples, batch_size = batch_size)
-
-
+    
 netG = mx.gluon.rnn.SequentialRNNCell()
 with netG.name_scope():
 
@@ -170,8 +166,7 @@ with netD2.name_scope():
     #netD2.add(nn.Dense(128, activation = "tanh"))
     #netD2.add(nn.Dense(128, activation = "tanh"))
     #netD2.add(nn.Dense(1))
-    
-    
+   
 loss = gluon.loss.SigmoidBinaryCrossEntropyLoss()
 
 netG.initialize(mx.init.Normal(0.3), ctx = ctx, force_reinit=True)
@@ -240,8 +235,7 @@ def calc_avgErr(fake1, fake2, fake3, fake4, netD,real_label_noise):
         total_loss = total_loss + subLoss/monteCarlo
     return total_loss/sample_size
     
-
-
+    
 from datetime import datetime
 import time
 import logging
@@ -272,16 +266,12 @@ for i in range(5):
     print("Plot %d" % i)
     #fake = mx.ndarray.concat(fake, fakeadd, dim = 0)
     data = fakeadd[i].asnumpy().tolist()
-    plt.hist(data, bins=bin_count)
-    plt.xticks(np.arange(min(data), max(data)+1, 1.0))
-
-    plt.show()
     
 print("Good luck bud")
 
 
 
-"""
+
 
 #set up Discriminator first
 for i in range(100):
@@ -428,7 +418,7 @@ for i in range(100):
         
     name, acc = metric.get()
     metric.reset()
-"""
+
 print("Done setting up Discriminator")
 for epoch in range(epochs+1):
     print(epoch)
@@ -580,7 +570,7 @@ for epoch in range(epochs+1):
             
             errG.backward()
         trainerG.step(mx.ndarray.concat(batch1.data[0], batch2.data[0], batch3.data[0], batch4.data[0]).shape[0], ignore_stale_grad = True)
-        print("Here")    
+        #print("Here")    
         
         with autograd.record():
             firstFake = makeOutput(netG, latent_z1)
@@ -667,7 +657,8 @@ for epoch in range(epochs+1):
             latent = mx.nd.random_normal(loc = 0, scale = 3, shape=(batch_size, latent_z_size, 2), ctx=ctx)
             fakeadd, _ = makeOutput(netG, latent)
             
-            print(fakeadd[0])
+            data = fakeadd[i].asnumpy().tolist()
+            fake = mx.ndarray.concat(fake, fakeadd, dim = 0)
         #fake = mx.ndarray.concat(fake1, fake2, fake3, fake4, dim = 0)
         
 
@@ -677,6 +668,7 @@ for epoch in range(epochs+1):
         #print(fake.T[0][1])
         #print("")
         #print("")
+        print(fake)
 
 
         #plt.show()   
@@ -684,3 +676,4 @@ for epoch in range(epochs+1):
     # visualize(fake_img)
     # plt.show()
 
+        
