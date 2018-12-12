@@ -12,6 +12,7 @@
 #PBS -j oe
 #PBS -V
 
+####  End PBS preamble
 
 #  Show list of CPUs you ran on, if you're running under PBS
 if [ -n "$PBS_NODEFILE" ]; then cat $PBS_NODEFILE; fi
@@ -28,4 +29,4 @@ mkdir /z/tmp/lubicz/
 cp /z/home/lubicz/testFiles /z/tmp/lubicz/
 cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
-python seqGANMC100init3.py
+python seqGANMC200init3.py
