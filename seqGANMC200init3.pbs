@@ -28,6 +28,4 @@ mkdir /z/tmp/lubicz/
 cp /z/home/lubicz/testFiles /z/tmp/lubicz/
 cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
-module load python-anaconda3
-pip install mxnet-cu80==1.0.0 --user
 python seqGANMC100init3.py
