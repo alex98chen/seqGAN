@@ -570,7 +570,7 @@ for epoch in range(epochs+1):
             
             errG.backward()
         trainerG.step(mx.ndarray.concat(batch1.data[0], batch2.data[0], batch3.data[0], batch4.data[0]).shape[0], ignore_stale_grad = True)
-        print("Here")    
+        #print("Here")    
         
         with autograd.record():
             firstFake = makeOutput(netG, latent_z1)
