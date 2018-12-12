@@ -2,20 +2,14 @@
 #### PBS preamble
 
 #PBS -N MC50init45
-
 # Change "bjensen" to your uniqname:
 #PBS -M lubicz@umich.edu
 #PBS -m abe
 
 # Change the number of cores (ppn=1), amount of memory, and walltime:
-#PBS -l nodes=1:gpus=1,mem=32000mb,walltime=72:00:00
+#PBS -l nodes=1:gpus=2,mem=20gb,walltime=1000:00:00
 #PBS -j oe
 #PBS -V
-
-# Change "example_flux" to the name of your Flux allocation:
-#PBS -A engin_fluxg
-#PBS -q fluxg
-#PBS -l qos=flux
 
 ####  End PBS preamble
 
@@ -30,11 +24,8 @@ echo "Hello, world"
 #PBS -l qos=flux
 ####  End PBS preamble
 
-mkdir /tmp/${PBS_JOBID}
-cd /tmp/${PBS_JOBID}
-
-
-cp -r ~/research .
-cd research
+mkdir /z/tmp/lubicz/
+cp /z/home/lubicz/testFiles /z/tmp/lubicz/
+cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
 python seqGANMC50init45.py
