@@ -25,11 +25,8 @@ echo "Hello, world"
 #PBS -l qos=flux
 ####  End PBS preamble
 
-mkdir /tmp/${PBS_JOBID}
-cd /tmp/${PBS_JOBID}
-
-
-cp -r ~/research .
-cd research
+mkdir /z/tmp/lubicz/
+cp /z/home/lubicz/testFiles /z/tmp/lubicz/
+cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
 python seqGANMC20init225.py
