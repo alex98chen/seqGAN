@@ -29,7 +29,5 @@ mkdir /z/tmp/lubicz/
 cp /z/home/lubicz/testFiles /z/tmp/lubicz/
 cd /z/tmp/lubicz/testFiles${PBS_JOBID}
 
-module load python-anaconda3
-pip install -u mxnet-cu92
 python seqGANMC100init225.py
                                                               33,1          Bot
