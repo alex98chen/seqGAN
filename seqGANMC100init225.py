@@ -24,7 +24,7 @@ number_samples = 65536
 sample_size = 16
 use_gpu = True
 ctx = mx.gpu() if use_gpu else mx.cpu()
-monteCarlo = 20
+monteCarlo = 100
 
 lr = 0.00002
 beta1 = 0.5
@@ -169,7 +169,7 @@ with netD2.name_scope():
    
 loss = gluon.loss.SigmoidBinaryCrossEntropyLoss()
 
-netG.initialize(mx.init.Normal(0.35), ctx = ctx, force_reinit=True)
+netG.initialize(mx.init.Normal(0.225), ctx = ctx, force_reinit=True)
 netD1.initialize(mx.init.Normal(0.095), ctx = ctx, force_reinit=True)
 netD2.initialize(mx.init.Normal(0.095), ctx = ctx, force_reinit=True)
 
